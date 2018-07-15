@@ -4,13 +4,13 @@ const compress = require('compression');
 const helmet = require('helmet');
 const cors = require('cors');
 const logger = require('winston');
+require('dotenv').config();
 
 const feathers = require('@feathersjs/feathers');
 const configuration = require('@feathersjs/configuration');
 const express = require('@feathersjs/express');
 const socketio = require('@feathersjs/socketio');
 
-require('dotenv').config();
 
 const middleware = require('./middleware');
 const services = require('./services');
