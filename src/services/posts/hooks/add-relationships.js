@@ -8,21 +8,20 @@ module.exports = function (options = {}) {
 
     context.params.sequelize = {
       include: [
-        {
-          model: context.app.services.comments.Model,
-          //as: 'posts',
-          order: [
-          ],
-       //   attributes: ['id'],
-          //paranoid: true,
-        },
-        {
-          model: context.app.services.tags.Model,
-          //as: 'posts',
-          order: [
-          ],
-       //   attributes: ['id'],
-          //paranoid: true,
+        { 
+          model: context.app.services.comments.Model, 
+          //as: 'posts', 
+          order: [], 
+          //attributes: ['id', 'title'], 
+          //paranoid: true, 
+        }, 
+        { 
+          model: context.app.services.tags.Model, 
+          order: [],
+        }, 
+        { 
+          model: context.app.services.categories.Model, 
+          order: [], 
         }
       ],
       raw: false,

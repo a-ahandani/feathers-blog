@@ -26,29 +26,37 @@ module.exports = function (app) {
 
   // eslint-disable-next-line no-unused-vars
   posts.associate = function (models) {
-    // Define associations here
-    // See http://docs.sequelizejs.com/en/latest/docs/associations/
     posts.hasMany(models.comments,
       {
         foreignKey:'commentableId',
         constraints: false,
         scope: {
-          commentable: 'post'
+          commentable: 'posts'
         }
-
       }); 
-    posts.belongsToMany(models.tags,
-      {
-        through: {
-          model: models["to_tags"],
-          unique: false,
-          scope: {
-            taggable: 'post'
-          }
-        },
-        foreignKey: 'taggableId',
-        constraints: false
-
+      posts.belongsToMany(models.tags,
+        {
+          through: {
+            model: models["to_tags"],
+            unique: false,
+            scope: {
+              taggable: 'posts'
+            }
+          },
+          foreignKey: 'taggableId',
+          constraints: false
+        });
+      posts.belongsToMany(models.categories,
+          {
+            through: {
+              model: models["to_categories"],
+              unique: false,
+              scope: {
+                categorizable: 'posts'
+              }
+            },
+            foreignKey: 'categorizableId',
+            constraints: false
       });
     
   

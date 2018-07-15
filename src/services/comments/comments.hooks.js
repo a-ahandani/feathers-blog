@@ -1,3 +1,4 @@
+const { authenticate } = require('@feathersjs/authentication').hooks;
 
 
 module.exports = {
@@ -6,9 +7,9 @@ module.exports = {
     find: [],
     get: [],
     create: [],
-    update: [],
-    patch: [],
-    remove: []
+    update: [authenticate('jwt')],
+    patch: [authenticate('jwt')],
+    remove: [authenticate('jwt')]
   },
 
   after: {
