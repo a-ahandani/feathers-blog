@@ -5,8 +5,12 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const tags = sequelizeClient.define('tags', {
-    title: {
+  const toTags = sequelizeClient.define('to_tags', {
+    taggable: {
+      type: DataTypes.STRING,
+      unique: 'item_tag_taggable'
+    },
+    tagId: {
       type: DataTypes.STRING,
       allowNull: false
     }
@@ -19,20 +23,10 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  tags.associate = function (models) {
+  toTags.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    tags.belongsToMany(models.posts,
-      {
-        through: {
-          model: models["to_tags"],
-          unique: false,
-        },
-        foreignKey: 'tagId',
-        constraints: false
-
-      });
   };
 
-  return tags;
+  return toTags;
 };

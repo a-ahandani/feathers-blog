@@ -36,7 +36,24 @@ module.exports = function (app) {
           commentable: 'post'
         }
 
+      }); 
+    posts.belongsToMany(models.tags,
+      {
+        through: {
+          model: models["to_tags"],
+          unique: false,
+          scope: {
+            taggable: 'post'
+          }
+        },
+        foreignKey: 'taggableId',
+        constraints: false
+
       });
+    
+  
+
+
 
 
   };

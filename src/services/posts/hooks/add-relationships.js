@@ -12,16 +12,20 @@ module.exports = function (options = {}) {
           model: context.app.services.comments.Model,
           //as: 'posts',
           order: [
-
+          ],
+       //   attributes: ['id'],
+          //paranoid: true,
+        },
+        {
+          model: context.app.services.tags.Model,
+          //as: 'posts',
+          order: [
           ],
        //   attributes: ['id'],
           //paranoid: true,
         }
-
       ],
       raw: false,
-
-
-    };
+    }
   };
 };
