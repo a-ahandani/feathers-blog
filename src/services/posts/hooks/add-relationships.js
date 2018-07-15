@@ -11,8 +11,10 @@ module.exports = function (options = {}) {
         {
           model: context.app.services.comments.Model,
           //as: 'posts',
-          order: [],
-          //attributes: ['id', 'title'],
+          order: [
+
+          ],
+       //   attributes: ['id'],
           //paranoid: true,
         }
 

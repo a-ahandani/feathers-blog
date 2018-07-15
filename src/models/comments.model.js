@@ -13,7 +13,12 @@ module.exports = function (app) {
     comment: {
       type: DataTypes.STRING,
       allowNull: false
+    },
+    commentable: {
+      type: DataTypes.STRING,
+      allowNull: false
     }
+    
   }, {
     hooks: {
       beforeCount(options) {
@@ -26,6 +31,12 @@ module.exports = function (app) {
   comments.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    comments.belongsTo(models.posts,
+      {
+        foreignKey:'commentableId',
+        constraints: false,
+        as:'post'
+      });
   };
 
   return comments;

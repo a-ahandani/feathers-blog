@@ -6,10 +6,15 @@ const DataTypes = Sequelize.DataTypes;
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
   const posts = sequelizeClient.define('posts', {
-    title: {
-      type: DataTypes.STRING,
-      allowNull: false
-    }
+      title: {
+          type: DataTypes.STRING,
+          allowNull: false
+      },
+      body: {
+          type: DataTypes.TEXT,
+          allowNull: true
+      },
+
 
   }, {
     hooks: {
@@ -23,7 +28,15 @@ module.exports = function (app) {
   posts.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    posts.hasMany(models.comments,{foreignKey:'postId'});
+    posts.hasMany(models.comments,
+      {
+        foreignKey:'commentableId',
+        constraints: false,
+        scope: {
+          commentable: 'post'
+        }
+
+      });
 
 
   };
