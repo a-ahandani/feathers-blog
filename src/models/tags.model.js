@@ -5,20 +5,11 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const comments = sequelizeClient.define('comments', {
-    author: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    comment: {
-      type: DataTypes.STRING,
-      allowNull: false
-    },
-    commentable: {
+  const tags = sequelizeClient.define('tags', {
+    title: {
       type: DataTypes.STRING,
       allowNull: false
     }
-    
   }, {
     hooks: {
       beforeCount(options) {
@@ -28,16 +19,20 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  comments.associate = function (models) {
+  tags.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    comments.belongsTo(models.posts,
+    tags.belongsToMany(models.posts,
       {
-        foreignKey:'commentableId',
-        constraints: false,
-        as:'post'
+        through: {
+          model: models["to_tags"],
+          unique: false,
+        },
+        foreignKey: 'tagId',
+        constraints: false
+
       });
   };
 
-  return comments;
+  return tags;
 };

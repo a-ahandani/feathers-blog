@@ -1,14 +1,11 @@
-//const addRelationships = require('./hooks/add-relationships');
 const { authenticate } = require('@feathersjs/authentication').hooks;
-const addRelationships = require('./hooks/add-relationships');
-//const emailValidator = require('../../hooks/email-validator');
 
-
+const modelsList = require('../../hooks/models-list');
 
 module.exports = {
   before: {
-    all: [addRelationships()],
-    find: [],
+    all: [ authenticate('jwt') ],
+    find: [modelsList()],
     get: [],
     create: [],
     update: [],
