@@ -32,6 +32,16 @@ module.exports = function (app) {
         constraints: false
 
       });
+    tags.belongsToMany(models.pages,
+      {
+        through: {
+          model: models["to_tags"],
+          unique: false,
+        },
+        foreignKey: 'tagId',
+        constraints: false
+
+      });
   };
 
   return tags;

@@ -35,7 +35,13 @@ module.exports = function (app) {
       {
         foreignKey:'commentableId',
         constraints: false,
-        as:'post'
+        as:'posts'
+      });
+    comments.belongsTo(models.pages,
+      {
+        foreignKey:'commentableId',
+        constraints: false,
+        as:'pages'
       });
   };
 

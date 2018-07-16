@@ -39,6 +39,7 @@ module.exports = function (app) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
     users.hasMany(models.posts, { foreignKey: 'userId' });
+    users.hasMany(models.pages, { foreignKey: 'userId' });
   };
 
   return users;

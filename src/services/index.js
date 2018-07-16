@@ -6,6 +6,7 @@ const tags = require('./tags/tags.service.js');
 const toTags = require('./to-tags/to-tags.service.js');
 const categories = require('./categories/categories.service.js');
 const toCategories = require('./to-categories/to-categories.service.js');
+const pages = require('./pages/pages.service.js');
 // eslint-disable-next-line no-unused-vars
 module.exports = function (app) {
   app.configure(posts);
@@ -16,4 +17,5 @@ module.exports = function (app) {
   app.configure(toTags);
   app.configure(categories);
   app.configure(toCategories);
+  app.configure(pages);
 };

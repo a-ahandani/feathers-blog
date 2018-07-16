@@ -38,6 +38,16 @@ module.exports = function (app) {
         constraints: false
 
       });
+    categories.belongsToMany(models.pages,
+      {
+        through: {
+          model: models["to_categories"],
+          unique: false,
+        },
+        foreignKey: 'categoryId',
+        constraints: false
+
+      });
   };
 
   return categories;
