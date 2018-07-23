@@ -6,7 +6,7 @@
     "default": 110,
     "max": 500
   },
-  "postgres": "POSTGRES_URI",
+  "postgres": "DATABASE_URL",
   "authentication": {
     "secret": "AUTH_SECRET",
     "strategies": [
