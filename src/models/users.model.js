@@ -16,21 +16,30 @@ module.exports = function (app) {
       type: DataTypes.STRING,
       allowNull: false
     },
+    firstName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
+    lastName: {
+      type: DataTypes.STRING,
+      allowNull: true
+    },
 
 
   }, {
-    hooks: {
-      beforeCount(options) {
-        options.raw = false;
+      hooks: {
+        beforeCount(options) {
+          options.raw = false;
+        }
       }
-    }
-  });
+    });
 
   // eslint-disable-next-line no-unused-vars
   users.associate = function (models) {
     // Define associations here
     // See http://docs.sequelizejs.com/en/latest/docs/associations/
-    users.hasMany(models.posts,{foreignKey:'userId'});
+    users.hasMany(models.posts, { foreignKey: 'userId' });
+    users.hasMany(models.pages, { foreignKey: 'userId' });
   };
 
   return users;

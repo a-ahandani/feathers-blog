@@ -3,23 +3,27 @@
   "port": 3030,
   "public": "../public/",
   "paginate": {
-    "default": 10,
-    "max": 50
+    "default": 110,
+    "max": 500
   },
-  "postgres": "POSTGRES_URI",
+  "postgres": "DATABASE_URL",
   "authentication": {
     "secret": "AUTH_SECRET",
     "strategies": [
       "jwt",
       "local"
     ],
+    "cookie": {
+      "enabled": true,
+      "name": "feathers-jwt"
+    },
     "path": "/authentication",
     "service": "users",
     "jwt": {
       "header": {
         "typ": "access"
       },
-      "audience": "https://yourdomain.com",
+      "audience": "http://localhost",
       "subject": "anonymous",
       "issuer": "feathers",
       "algorithm": "HS256",

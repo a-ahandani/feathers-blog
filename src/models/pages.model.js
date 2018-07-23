@@ -5,17 +5,15 @@ const DataTypes = Sequelize.DataTypes;
 
 module.exports = function (app) {
   const sequelizeClient = app.get('sequelizeClient');
-  const posts = sequelizeClient.define('posts', {
-      title: {
-          type: DataTypes.STRING,
-          allowNull: false
-      },
-      body: {
-          type: DataTypes.TEXT,
-          allowNull: true
-      },
-
-
+  const pages = sequelizeClient.define('pages', {
+    title: {
+      type: DataTypes.STRING,
+      allowNull: false
+    },
+    body: {
+        type: DataTypes.TEXT,
+        allowNull: true
+    },
   }, {
     hooks: {
       beforeCount(options) {
@@ -25,46 +23,42 @@ module.exports = function (app) {
   });
 
   // eslint-disable-next-line no-unused-vars
-  posts.associate = function (models) {
-    posts.hasMany(models.comments,
+  pages.associate = function (models) {
+    // Define associations here
+    // See http://docs.sequelizejs.com/en/latest/docs/associations/
+    pages.hasMany(models.comments,
       {
         foreignKey:'commentableId',
         constraints: false,
         scope: {
-          commentable: 'posts'
+          commentable: 'pages'
         }
       }); 
-      posts.belongsToMany(models.tags,
+      pages.belongsToMany(models.tags,
         {
           through: {
             model: models["to_tags"],
             unique: false,
             scope: {
-              taggable: 'posts'
+              taggable: 'pages'
             }
           },
           foreignKey: 'taggableId',
           constraints: false
         });
-      posts.belongsToMany(models.categories,
+      pages.belongsToMany(models.categories,
           {
             through: {
               model: models["to_categories"],
               unique: false,
               scope: {
-                categorizable: 'posts'
+                categorizable: 'pages'
               }
             },
             foreignKey: 'categorizableId',
             constraints: false
       });
-    
-  
-
-
-
-
   };
 
-  return posts;
+  return pages;
 };
